@@ -142,7 +142,7 @@ def get_emissaries(conf):
         elif emissary_expires_raw == "1d":
             emissary_expires = "tomorrow"
         else:
-            emissary_expires = "two days"
+            emissary_expires = "in two days"
         emissaries.append(
             [
                 quest_div.a["href"][7:],
