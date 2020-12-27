@@ -28,7 +28,7 @@
 # <bitbar.author.github>BryantD</bitbar.author.github>
 # <bitbar.desc>Tracking interesting WoW World Quests</bitbar.desc>
 # <bitbar.dependencies>python3, requests, beautifulsoup</bitbar.dependencies>
-# <bitbar.image>XXX</bitbar.image>
+# <bitbar.image>https://github.com/BryantD/wow-quest-tracker/blob/main/screenshot-01.png?raw=true</bitbar.image>
 # <bitbar.abouturl>https://github.com/BryantD/wow-quest-tracker</bitbar.abouturl>
 
 import time, datetime, calendar
