@@ -19,7 +19,7 @@ This project is under an MIT license.
 
 # Usage
 
-![Plugin example](https://github.com/BryantD/wow-quest-tracker/blob/main/screenshot-01.png?raw=true)
+<img src="https://github.com/BryantD/wow-quest-tracker/blob/main/screenshot-01.png" alt="Plugin example" width=400>
 
 A [!] icon shows up in the menu bar if there are any quests which match
 your flags; these will also be called out in the dropdown. Click on a 
