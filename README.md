@@ -21,7 +21,6 @@ This project is under an MIT license.
 
 ![Plugin example](https://github.com/BryantD/wow-quest-tracker/blob/main/screenshot-01.png?raw=true)
 
-
 A [!] icon shows up in the menu bar if there are any quests which match
 your flags; these will also be called out in the dropdown. Click on a 
 quest to go to the quest's Wowhead page.
@@ -33,6 +32,11 @@ happily take a pull request.
 # Untested
 
 As of 1.0, I haven't tested end of month time calculations.
+
+This probably doesn't work with
+[BitBar](https://github.com/matryer/bitbar), only because I use
+SwiftBar's SFSymbol support. Easy enough to add, I just haven't
+done it.
 
 # Getting Help
 
