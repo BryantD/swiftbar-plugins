@@ -32,6 +32,7 @@
 # <bitbar.abouturl>https://github.com/BryantD/wow-quest-tracker</bitbar.abouturl>
 
 import time, datetime, calendar
+import os
 import json
 import requests
 from operator import itemgetter
@@ -58,8 +59,7 @@ def configure():
     conf["factions"] = ["alliance", "both"]
     conf["emissaries_flagged"] = [
         "Proudmoore Admiralty",
-        "Champions of Azeroth",
-        "Waveblade Ankoan",
+        "The Waveblade Ankoan",
     ]
     conf["quests_flagged"] = [
         "Enchanting", 
@@ -77,8 +77,16 @@ def configure():
     # 4 = Pets
     # 15 = Callings
 
-    # Miscellanea
+    # UI
     conf["header_color"] = "darkgreen"
+    if int(os.environ["OS_VERSION_MAJOR"]) >= 11:
+        conf["menu_bar_flag"] = ":exclamationmark.square:"
+        conf["quest_flag"] = ":chevron.forward.circle.fill:"
+    else:
+        conf["menu_bar_flag"] = "[!]"
+        conf["quest_flag"] = ">>"
+    
+    # Miscellanea
     conf[
         "user_agent"
     ] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15"
@@ -96,9 +104,9 @@ def show_error(status_code, error):
     print(f"--{error} | color=black")
 
 
-def show_menubar(alert):
+def show_menubar(alert, conf):
     if alert:
-        flagged = ":exclamationmark.square:"
+        flagged = conf["menu_bar_flag"] 
     else:
         flagged = ""
 
@@ -176,7 +184,7 @@ def show_emissary_header(conf):
 
 def show_emissaries(emissaries, conf):
     for emissary in emissaries:
-        flagged = ":chevron.forward.circle.fill:" if emissary[3] else ""
+        flagged = conf["quest_flag"] if emissary[3] else ""
         print(
             f'{flagged} {emissary[1]}: expires {emissary[2]} | href={conf["wowhead_quest"]}{emissary[0]}'
         )
@@ -246,7 +254,7 @@ def show_world_quests(quests, conf):
     now = time.localtime()
 
     for quest in quests:
-        flagged = ":chevron.forward.circle.fill:" if quest[4] else ""
+        flagged = conf["quest_flag"] if quest[4] else ""
 
         expires_time = time.localtime(quest[2])
         expires_string = time.strftime("%I %p", expires_time).lstrip("0")
@@ -287,7 +295,7 @@ def main():
                 quest[4] = True
                 alert = True
 
-    show_menubar(alert)
+    show_menubar(alert, conf)
 
     show_emissary_header(conf)
     if emissary_status == 200:
