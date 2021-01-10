@@ -11,7 +11,7 @@ This project is under an MIT license.
 
 # Installation
 
-1. Download [wow.2h.py](https://github.com/BryantD/wow-quest-tracker/blob/main/wow.2h.py) to your SwiftBar plugin folder
+1. Download [wow.2h.py](https://github.com/BryantD/swiftbar-plugins/blob/main/Games/wow.2h.py) to your SwiftBar plugin folder
 1. Edit the configure() function to reflect your needs
     * emissaries_flagged is a list of full faction names
     * quests_flagged is a list of substrings to look for in the quest name
@@ -19,7 +19,7 @@ This project is under an MIT license.
 
 # Usage
 
-<img src="https://github.com/BryantD/wow-quest-tracker/blob/main/screenshot-01.png" alt="Plugin example" width=400>
+<img src="https://github.com/BryantD/swiftbar-plugins/blob/main/images/wow-quests-doc-image-01.png" alt="Plugin example" width=400>
 
 A [!] icon shows up in the menu bar if there are any quests which match
 your flags; these will also be called out in the dropdown. Click on a 
