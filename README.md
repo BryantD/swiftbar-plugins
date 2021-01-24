@@ -51,14 +51,14 @@ persistence to get it working.
 1. Create a file in your ``config`` folder called ``wow_ah.ini``
 1. Add the API tokens and item information to that file, following the pattern here:
 
-	[API]
-	client_id=<created in step two>
-	secret=<created in step two>
+    [API]  
+    client_id=<created in step two>  
+    secret=<created in step two>  
 
-	[Item]
-	item_name=<free form text, doesn't need to be the actual item name>
-	item_id=<WoW item ID -- try WoWhead to find this>
-	context=<kind of a mystery to me>
+    [Item]  
+    item_name=<free form text, doesn't need to be the actual item name>  
+    item_id=<WoW item ID -- try WoWhead to find this>  
+    context=<kind of a mystery to me>  
 
 I figured out the context number for the item I cared about by manually fiddling
 with the WoW Auction House API and discovering that a level 225 Grim-Veiled Hood
