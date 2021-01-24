@@ -38,9 +38,8 @@ import configparser
 
 def main():
 	# TODO: split the config stuff into a function to clean up flow 
-	sb_plugin_path = os.getenv('SWIFTBAR_PLUGIN_PATH') or sys.argv[0]
-	sb_plugin_dir = os.path.dirname(sb_plugin_path)
-	real_plugin_path = os.path.realpath(sb_plugin_path)
+	sb_plugin_dir = os.getenv('SWIFTBAR_PLUGINS_PATH') 
+	real_plugin_path = os.getenv('SWIFTBAR_PLUGIN_PATH') or sys.argv[0]
 	real_plugin_dir = os.path.dirname(real_plugin_path)
 
 	if os.path.isfile(f'{sb_plugin_dir}/config/wow_ah.ini'):
@@ -49,7 +48,6 @@ def main():
 		config_path = f'{real_plugin_dir}/config/wow_ah.ini'
 	else:
 		print("WoW AH: No config")
-		print(sb_plugin_dir)
 		quit()
 
 	config = configparser.ConfigParser()
