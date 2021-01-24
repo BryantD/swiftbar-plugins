@@ -2,7 +2,7 @@
 
 # The MIT License (MIT)
 #
-# Copyright (c) 2020 Bryant Durrell
+# Copyright (c) 2020-2021 Bryant Durrell
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,13 +23,13 @@
 # SOFTWARE.
 
 # <bitbar.title>WoW Quest Tracker</bitbar.title>
-# <bitbar.version>v1.0</bitbar.version>
+# <bitbar.version>v1.1.1</bitbar.version>
 # <bitbar.author>Bryant Durrell</bitbar.author>
 # <bitbar.author.github>BryantD</bitbar.author.github>
 # <bitbar.desc>Tracking interesting WoW World Quests</bitbar.desc>
 # <bitbar.dependencies>python3, requests, beautifulsoup</bitbar.dependencies>
-# <bitbar.image>https://github.com/BryantD/wow-quest-tracker/blob/main/screenshot-01.png?raw=true</bitbar.image>
-# <bitbar.abouturl>https://github.com/BryantD/wow-quest-tracker</bitbar.abouturl>
+# <bitbar.image>https://github.com/BryantD/swiftbar-plugins/raw/main/images/wow-quests-doc-image-01.png</bitbar.image>
+# <bitbar.abouturl>https://github.com/BryantD/swiftbar-plugins</bitbar.abouturl>
 
 import time, datetime, calendar
 import os

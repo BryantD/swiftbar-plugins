@@ -27,49 +27,58 @@
 # <bitbar.author>Bryant Durrell</bitbar.author>
 # <bitbar.author.github>BryantD</bitbar.author.github>
 # <bitbar.desc>Tracking specific AH items</bitbar.desc>
-# <bitbar.dependencies>python3, blizzardapi</bitbar.dependencies>
+# <bitbar.dependencies>python3, python-blizzardapi</bitbar.dependencies>
 # <bitbar.image></bitbar.image>
-# <bitbar.abouturl></bitbar.abouturl>
-
+# <bitbar.abouturl>https://github.com/BryantD/swiftbar-plugins</bitbar.abouturl>
 
 from blizzardapi import BlizzardApi
 import os, sys
 import configparser
 
+
+def get_config(config_name):
+    sb_plugin_dir = os.getenv("SWIFTBAR_PLUGINS_PATH")
+    real_plugin_path = os.getenv("SWIFTBAR_PLUGIN_PATH") or sys.argv[0]
+    real_plugin_dir = os.path.dirname(real_plugin_path)
+
+    if os.path.isfile(f"{sb_plugin_dir}/config/{config_name}"):
+        config_path = f"{sb_plugin_dir}/config/{config_name}"
+    elif os.path.isfile(f"{real_plugin_dir}/config/{config_name}"):
+        config_path = f"{real_plugin_dir}/config/{config_name}"
+    else:
+        return False
+
+    config = configparser.ConfigParser()
+    config.read(config_path)
+    return config
+
+
 def main():
-	# TODO: split the config stuff into a function to clean up flow 
-	sb_plugin_dir = os.getenv('SWIFTBAR_PLUGINS_PATH') 
-	real_plugin_path = os.getenv('SWIFTBAR_PLUGIN_PATH') or sys.argv[0]
-	real_plugin_dir = os.path.dirname(real_plugin_path)
+    config = get_config("wow_ah.ini")
+    if config:
+        api_client_id = config["API"]["client_id"]
+        api_secret = config["API"]["secret"]
+        target_item_id = int(config["Item"]["item_id"])
+        target_item_context = int(config["Item"]["context"])
+        target_item_name = config["Item"]["item_name"]
 
-	if os.path.isfile(f'{sb_plugin_dir}/config/wow_ah.ini'):
-		config_path = f'{sb_plugin_dir}/config/wow_ah.ini'
-	elif os.path.isfile(f'{real_plugin_dir}/config/wow_ah.ini'):
-		config_path = f'{real_plugin_dir}/config/wow_ah.ini'
-	else:
-		print("WoW AH: No config")
-		quit()
+        api_client = BlizzardApi(api_client_id, api_secret)
 
-	config = configparser.ConfigParser()
-	config.read(config_path)
-	
-	api_client_id = config['API']['client_id']
-	api_secret = config['API']['secret']
-	target_item_id = int(config['Item']['item_id'])
-	target_item_context = int(config['Item']['context'])
-	target_item_name = config['Item']['item_name']
-		
-	api_client = BlizzardApi(api_client_id, api_secret)
-	
-	buyout_list = []
+        buyout_list = []
 
-	auction_data = api_client.wow.game_data.get_auctions("us", "en_US", 100)
-	for item in auction_data['auctions']:
-		if item['item']['id'] == target_item_id and item['item']['context'] == target_item_context:
-			buyout_list.append(int(item['buyout'] / 10000))
-			
-	buyout_list.sort(reverse=True)
-	print(f"{target_item_name}: {buyout_list[0]:,}G")
-			
+        auction_data = api_client.wow.game_data.get_auctions("us", "en_US", 100)
+        for item in auction_data["auctions"]:
+            if (
+                item["item"]["id"] == target_item_id
+                and item["item"]["context"] == target_item_context
+            ):
+                buyout_list.append(int(item["buyout"] / 10000))
+
+        buyout_list.sort(reverse=True)
+        print(f"{target_item_name}: {buyout_list[0]:,}G")
+    else:
+        print("WoW AH: No config")
+
+
 if __name__ == "__main__":
     main()
