@@ -19,3 +19,4 @@
 ## 2021-01-24 (1.0.1):
 
 * Fixed bug when no items are found
+* Moved connected realm ID to the config file

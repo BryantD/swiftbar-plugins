@@ -55,6 +55,9 @@ persistence to get it working.
     client_id=<created in step two>  
     secret=<created in step two>  
 
+    [Server]
+    connected_realm_id=<find this via the connected realm API>
+
     [Item]  
     item_name=<free form text, doesn't need to be the actual item name>  
     item_id=<WoW item ID -- try WoWhead to find this>  

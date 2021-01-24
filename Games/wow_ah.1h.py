@@ -59,15 +59,18 @@ def main():
     if config:
         api_client_id = config["API"]["client_id"]
         api_secret = config["API"]["secret"]
+
         target_item_id = int(config["Item"]["item_id"])
         target_item_context = int(config["Item"]["context"])
         target_item_name = config["Item"]["item_name"]
+
+        connected_realm_id = config["Server"]["connected_realm_id"]
 
         api_client = BlizzardApi(api_client_id, api_secret)
 
         buyout_list = []
 
-        auction_data = api_client.wow.game_data.get_auctions("us", "en_US", 100)
+        auction_data = api_client.wow.game_data.get_auctions("us", "en_US", connected_realm_id)
         for item in auction_data["auctions"]:
             if (
                 item["item"]["id"] == target_item_id
