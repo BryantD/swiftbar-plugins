@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 # <bitbar.title>WoW Auction House Tracker</bitbar.title>
-# <bitbar.version>v1.0</bitbar.version>
+# <bitbar.version>v1.0.1</bitbar.version>
 # <bitbar.author>Bryant Durrell</bitbar.author>
 # <bitbar.author.github>BryantD</bitbar.author.github>
 # <bitbar.desc>Tracking specific AH items</bitbar.desc>
@@ -55,6 +55,7 @@ def get_config(config_name):
 
 def main():
     config = get_config("wow_ah.ini")
+    
     if config:
         api_client_id = config["API"]["client_id"]
         api_secret = config["API"]["secret"]
@@ -75,7 +76,10 @@ def main():
                 buyout_list.append(int(item["buyout"] / 10000))
 
         buyout_list.sort(reverse=True)
-        print(f"{target_item_name}: {buyout_list[0]:,}G")
+        if len(buyout_list) > 0:
+            print(f"{target_item_name}: {buyout_list[0]:,}G")
+        else:
+            print(f"{target_item_name}: none found")
     else:
         print("WoW AH: No config")
 

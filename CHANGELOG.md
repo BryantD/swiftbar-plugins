@@ -15,3 +15,7 @@
 ## 2021-01-23 (1.0):
 
 * Initial release
+
+## 2021-01-24 (1.0.1):
+
+* Fixed bug when no items are found
