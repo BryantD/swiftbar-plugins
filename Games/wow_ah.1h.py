@@ -61,7 +61,10 @@ def main():
         api_secret = config["API"]["secret"]
 
         target_item_id = int(config["Item"]["item_id"])
-        target_item_context = int(config["Item"]["context"])
+        if config.has_option("Item", "context"):
+            target_item_context = int(config["Item"]["context"])
+        else:
+            target_item_context = 0
         target_item_name = config["Item"]["item_name"]
 
         connected_realm_id = config["Server"]["connected_realm_id"]
@@ -71,12 +74,13 @@ def main():
         buyout_list = []
 
         auction_data = api_client.wow.game_data.get_auctions("us", "en_US", connected_realm_id)
-        for item in auction_data["auctions"]:
-            if (
-                item["item"]["id"] == target_item_id
-                and item["item"]["context"] == target_item_context
-            ):
-                buyout_list.append(int(item["buyout"] / 10000))
+        for item in auction_data["auctions"]: # context doesn't exist for most auctions
+            if item["item"]["id"] == target_item_id: # This could be collapsed down but would be less readable
+                if target_item_context:
+                    if item["item"]["context"] == target_item_context:
+                        buyout_list.append(int(item["buyout"] / 10000))
+                else:
+                     buyout_list.append(int(item["buyout"] / 10000))
 
         buyout_list.sort(reverse=True)
         if len(buyout_list) > 0:
