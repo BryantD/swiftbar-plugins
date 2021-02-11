@@ -55,32 +55,49 @@ def get_config(config_name):
 
 def main():
     config = get_config("wow_ah.ini")
-    
+
     if config:
-        api_client_id = config["API"]["client_id"]
-        api_secret = config["API"]["secret"]
+        api_client_id = (
+            config["API"]["client_id"]
+            if config.has_option("API", "client_id")
+            else False
+        )
+        api_secret = (
+            config["API"]["secret"] if config.has_option("API", "secret") else False
+        )
+        connected_realm_id = (
+            config["Server"]["connected_realm_id"]
+            if config.has_option("Server", "connected_realm_id")
+            else False
+        )
+        
+        if not (api_client_id and api_secret and connected_realm_id):
+            print(f"WoW AH: error in config file")
+            sys.exit()
 
         target_item_id = int(config["Item"]["item_id"])
         if config.has_option("Item", "context"):
             target_item_context = int(config["Item"]["context"])
         else:
-            target_item_context = 0
+            target_item_context = False
         target_item_name = config["Item"]["item_name"]
-
-        connected_realm_id = config["Server"]["connected_realm_id"]
 
         api_client = BlizzardApi(api_client_id, api_secret)
 
         buyout_list = []
 
-        auction_data = api_client.wow.game_data.get_auctions("us", "en_US", connected_realm_id)
-        for item in auction_data["auctions"]: # context doesn't exist for most auctions
-            if item["item"]["id"] == target_item_id: # This could be collapsed down but would be less readable
+        auction_data = api_client.wow.game_data.get_auctions(
+            "us", "en_US", connected_realm_id
+        )
+        for item in auction_data["auctions"]:  # context doesn't exist for most auctions
+            if (
+                item["item"]["id"] == target_item_id
+            ):  # This could be collapsed down but would be less readable
                 if target_item_context:
                     if item["item"]["context"] == target_item_context:
                         buyout_list.append(int(item["buyout"] / 10000))
                 else:
-                     buyout_list.append(int(item["buyout"] / 10000))
+                    buyout_list.append(int(item["buyout"] / 10000))
 
         buyout_list.sort(reverse=True)
         if len(buyout_list) > 0:
@@ -88,7 +105,7 @@ def main():
         else:
             print(f"{target_item_name}: none found")
     else:
-        print("WoW AH: No config")
+        print("WoW AH: config file not found")
 
 
 if __name__ == "__main__":
