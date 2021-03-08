@@ -6,6 +6,23 @@ SwiftBar features (environment variables, SF Symbols).
 
 All plugins are released under an MIT license.
 
+## drivethrurpg-deal-day
+
+Displays the current Deal of the Day at [DriveThruRPG](https://www.drivethrurpg.com/).
+
+### Requirements
+
+* Python 3 (requests, BeautifulSoup)
+
+### Installation 
+
+1. Download [drivethrurpg-deal-day.1d.py](https://github.com/BryantD/swiftbar-plugins/blob/main/Games/drivethrurpg-deal-day.1d.py) to your SwiftBar
+
+### Usage
+
+The item name and price displays in the menu bar. The drop down menu contains a list of 
+rules systems the item works with. Click any rules system to go to the item page.
+
 ## wow-quest
 
 A WoW world quest tracker.
@@ -56,16 +73,23 @@ persistence to get it working.
     secret=<created in step two>  
 
     [Server]
-    connected_realm_id=<find this via the connected realm API>
+    connected_realm_id=<realm ID>
 
     [Item]  
     item_name=<free form text, doesn't need to be the actual item name>  
-    item_id=<WoW item ID -- try WoWhead to find this>  
-    context=<kind of a mystery to me>  
+    item_id=<WoW item ID>  
+    context=<ID for the specific variant of an item (runecrafted base items have this)>  
 
-I figured out the context number for the item I cared about by manually fiddling
-with the WoW Auction House API and discovering that a level 225 Grim-Veiled Hood
-always had context=65. There is no documentation for this. I'll play with it more
+To find a realm ID, log into a character on the desired server and paste this 
+string into chat:
+
+	/run local x=GetRealmID(); print("Realm ID: ", x)
+
+To find an item_id, check [Wowhead](https://www.wowhead.com). The item ID is in the URL for any item page.
+
+The context is optional; you don't need it unless you're looking for a specific 
+variant of a multi-variant item. You can find the context number for an item via
+the WoW Auction House API. There is no documentation for this. I'll play with it more
 at some point and hopefully write better docs.
 
 ### Usage
