@@ -4,6 +4,10 @@
 
 - Initial release
 
+## 2021-03-22 (1.0.1)
+
+- Handled the case where rules system is None or absent entirely (surprisingly common!)
+
 # WoW Quest Tracker 
 
 ## 2021-01-03 (1.1.0):
