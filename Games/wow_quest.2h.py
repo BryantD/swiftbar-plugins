@@ -58,12 +58,8 @@ def configure():
     # Filters for things I care about
     conf["factions"] = ["alliance", "both"]
     conf["emissaries_flagged"] = [
-        "Proudmoore Admiralty",
-        "The Waveblade Ankoan",
     ]
     conf["quests_flagged"] = [
-        "Enchanting", 
-        "Jewelcrafting",
     ]
 
     # Quest types we care about
