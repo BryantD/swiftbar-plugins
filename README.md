@@ -6,6 +6,38 @@ SwiftBar features (environment variables, SF Symbols).
 
 All plugins are released under an MIT license.
 
+## cagematch-shows
+
+Displays the ratings w/out results from the most recent match from a specified wrestling promotion; scrapes Cagematch for data.
+
+### Requirements
+
+* Python 3 (requests, BeautifulSoup)
+
+### Installation 
+
+By default, this plugin tracks NJPW shows. If you'd like to track another promotion, follow the optional steps as well.
+
+1. Download [cagematch-shows.1h.py](https://github.com/BryantD/swiftbar-plugins/blob/main/Sports/cagematch-shows.1h.py) to your SwiftBar plugin folder
+
+Optionally:
+
+1. Create a ``config`` folder inside your SwiftBar plugin folder
+1. Create a file in your ``config`` folder called ``cagematch-shows.ini``
+1. Add the promotion name you'd like to track to that file, following the pattern here:
+
+    [Config]  
+    promotion=World Wrestling Entertainment 
+
+### Usage
+
+The show name and overall Cagematch rating (if any) is displayed in the menu bar. The drop down menu lists the matches, also with Cagematch ratings (if any). Select any match to go to the event page, which will show the card with ratings but no results.
+
+### To Do
+
+Add a configurable filter to ignore shows (i.e., you might not care about AEW Elevation).
+
+
 ## drivethrurpg-deal-day
 
 Displays the current Deal of the Day at [DriveThruRPG](https://www.drivethrurpg.com/).
@@ -16,7 +48,7 @@ Displays the current Deal of the Day at [DriveThruRPG](https://www.drivethrurpg.
 
 ### Installation 
 
-1. Download [drivethrurpg-deal-day.1d.py](https://github.com/BryantD/swiftbar-plugins/blob/main/Games/drivethrurpg-deal-day.1d.py) to your SwiftBar
+1. Download [drivethrurpg-deal-day.1d.py](https://github.com/BryantD/swiftbar-plugins/blob/main/Games/drivethrurpg-deal-day.1d.py) to your SwiftBar plugin folder
 
 ### Usage
 
