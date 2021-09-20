@@ -1,3 +1,9 @@
+# Cagematch Shows
+
+## 2021-09-20 (1.0.0)
+
+- Initial release
+
 # DriveThruRPG Deal of the Day
 
 ## 2021-03-08 (1.0.0)
