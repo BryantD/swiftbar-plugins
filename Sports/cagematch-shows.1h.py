@@ -201,15 +201,22 @@ def main():
             if config.has_option("Config", "promotion")
             else "New Japan Pro Wrestling"
         )
+        promotion_id = (
+			config["Config"]["promotion_id"]
+            if config.has_option("Config", "promotion_id")
+            else False
+        )
 
     else:
         promotion = "New Japan Pro Wrestling"
+        promotion_id = 7
 
     promotion_url = "https://www.cagematch.net/?id=1&view=search&sPromotion=$id&sDateFromDay=$day_from&sDateFromMonth=$month_from&sDateFromYear=$year_from&sDateTillDay=$day_to&sDateTillMonth=$month_to&sDateTillYear=$year_to"
     event_list_url = "https://www.cagematch.net/?id=1&view=search"
     event_url = "https://www.cagematch.net/?id=1&nr=$id&page=3"
 
-    promotion_id = get_promotion_id(event_list_url, promotion)
+    if not promotion_id:
+        promotion_id = get_promotion_id(event_list_url, promotion)
     if promotion_id:
         events = get_event_list(promotion_url, promotion_id)
         matches = get_event_matches(event_url, events[0]["id"])

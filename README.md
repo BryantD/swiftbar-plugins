@@ -28,6 +28,9 @@ Optionally:
 
     [Config]  
     promotion=World Wrestling Entertainment 
+    promotion_id=1
+    
+promotion_id is optional, but if you add it you'll save a HTTP call.
 
 ### Usage
 
@@ -35,8 +38,8 @@ The show name and overall Cagematch rating (if any) is displayed in the menu bar
 
 ### To Do
 
-Add a configurable filter to ignore shows (i.e., you might not care about AEW Elevation).
-
+- Add a configurable filter to ignore shows (i.e., you might not care about AEW Elevation)
+- Improve promotion ID lookup by using search instead of scraping a huge pulldown menu
 
 ## drivethrurpg-deal-day
 
