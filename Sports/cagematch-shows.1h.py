@@ -37,6 +37,7 @@ import configparser
 import datetime
 from string import Template
 import os, sys
+import re
 
 
 def get_config(config_name):
@@ -183,7 +184,14 @@ def show_match_data(event, matches):
     print(f'{event["name"]}: {event["date"].__format__("%x")} {parsed_event_rating}')
     print("---")
     for match in matches:
-        parsed_match_rating = f'({match["rating"]})' if match["rating"] else ""
+        if match["rating"] and match["won_rating"]:
+            parsed_match_rating = f'({match["rating"]} / WON: {match["won_rating"]})'
+        elif match["rating"]:      
+            parsed_match_rating = f'({match["rating"]})'
+        elif match["won_rating"]:
+            parsed_match_rating = f'(WON: {match["won_rating"]})'
+        else:
+            parsed_match_rating = ""
         print(
             f'{match["type"]}: {match["wrestlers"]} {parsed_match_rating} |href={event["url"]}'
         )
