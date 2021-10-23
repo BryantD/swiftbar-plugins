@@ -23,7 +23,7 @@
 # software.
 
 # <bitbar.title>cagematch last show</bitbar.title>
-# <bitbar.version>v1.0.0</bitbar.version>
+# <bitbar.version>v1.0.2</bitbar.version>
 # <bitbar.author>bryant durrell</bitbar.author>
 # <bitbar.author.github>bryantd</bitbar.author.github>
 # <bitbar.desc>show the last show w/ratings from specific promotion</bitbar.desc>
