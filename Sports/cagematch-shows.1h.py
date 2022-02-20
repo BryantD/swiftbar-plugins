@@ -23,7 +23,7 @@
 # software.
 
 # <bitbar.title>cagematch last show</bitbar.title>
-# <bitbar.version>v1.0.0</bitbar.version>
+# <bitbar.version>v1.0.2</bitbar.version>
 # <bitbar.author>bryant durrell</bitbar.author>
 # <bitbar.author.github>bryantd</bitbar.author.github>
 # <bitbar.desc>show the last show w/ratings from specific promotion</bitbar.desc>
@@ -37,6 +37,7 @@ import configparser
 import datetime
 from string import Template
 import os, sys
+import re
 
 
 def get_config(config_name):
@@ -150,27 +151,27 @@ def get_event_matches(event_url, event_id):
     for match in match_list_div.find_all(class_="Match"):
         match_type = match.find("div", class_="MatchType").text
         match_wrestlers = match.find("div", class_="MatchResults").text
-        match_rating = (
+        match_rating_text = (
             match.find("div", class_="MatchRecommendedLine").text
             if match.find("div", class_="MatchRecommendedLine")
             else ""
         )
-        match_rating = match_rating[
-            match_rating.find(":::: Matchguide Rating: ")
-            + 24 : match_rating.find(" based on")
-        ]
-        # match_won_rating = (
-        # 	 match.select("span", class_="MatchRecommendedWON").text
-        # 	 if match.select("span", class_="MatchRecommendedWON")
-        # 	 else ""
-        # )
-        match_won_rating = ""
+        match_rating_text = (
+            re.search("\d\.\d\d", match_rating_text).group(0)
+            if re.search("\d\.\d\d", match_rating_text)
+            else ""
+        )
+        match_won_rating = (
+        	 match.find("span", class_="starRating").text
+        	 if match.find("span", class_="starRating")
+        	 else ""
+        )
 
         match_list.append(
             {
                 "type": match_type,
                 "wrestlers": match_wrestlers,
-                "rating": match_rating,
+                "rating": match_rating_text,
                 "won_rating": match_won_rating,
             }
         )
@@ -183,7 +184,14 @@ def show_match_data(event, matches):
     print(f'{event["name"]}: {event["date"].__format__("%x")} {parsed_event_rating}')
     print("---")
     for match in matches:
-        parsed_match_rating = f'({match["rating"]})' if match["rating"] else ""
+        if match["rating"] and match["won_rating"]:
+            parsed_match_rating = f'({match["rating"]} / WON: {match["won_rating"]})'
+        elif match["rating"]:      
+            parsed_match_rating = f'({match["rating"]})'
+        elif match["won_rating"]:
+            parsed_match_rating = f'(WON: {match["won_rating"]})'
+        else:
+            parsed_match_rating = ""
         print(
             f'{match["type"]}: {match["wrestlers"]} {parsed_match_rating} |href={event["url"]}'
         )

@@ -1,5 +1,9 @@
 # Cagematch Shows
 
+## 2021-10-23 (1.0.2)
+
+- More robust rating scraping, implemented WON ratings
+
 ## 2021-09-23 (1.0.1)
 
 - Added a config parameter for promotion ID, to save a call to Cagematch
