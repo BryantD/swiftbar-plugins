@@ -58,9 +58,29 @@ Displays the current Deal of the Day at [DriveThruRPG](https://www.drivethrurpg.
 The item name and price displays in the menu bar. The drop down menu contains a list of 
 rules systems the item works with. Click any rules system to go to the item page.
 
+## showdown-check
+
+Displays the current Letterboxd showdown (see https://letterboxd.com/showdown/)
+
+### Requirements
+
+* htmlq (https://github.com/mgdm/htmlq)
+
+### Installation
+
+1. Download [showdown-check.1d.sh](https://github.com/BryantD/swiftbar-plugins/blob/main/Lifestyle/showdown-check.1d.sh) to your SwiftBar plugin folder
+
+That's it, no options.
+
+### Usage
+
+One header line showing the current Letterboxd showdown (or None if none). For my
+own purposes, the script is also capable of running as a periodic standalone task
+that pops up a OS X notification if the showdown has changed.
+
 ## wow-quest
 
-A WoW world quest tracker.
+A WoW world quest tracker (out of date as of recent patches).
 
 ### Requirements
 
