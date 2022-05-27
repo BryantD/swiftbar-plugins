@@ -22,6 +22,12 @@
 
 - Initial release
 
+# Letterboxd Showdown
+
+## 2022-05-27 (1.0.0)
+
+- Initial release
+
 # WoW Quest Tracker 
 
 ## 2021-01-23 (1.1.1):
